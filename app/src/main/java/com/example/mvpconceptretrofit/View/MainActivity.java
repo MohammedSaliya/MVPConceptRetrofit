@@ -46,11 +46,15 @@ public class MainActivity extends AppCompatActivity implements ContryView {
                     + "-Alph3:" + country.getAlpha3Code());
 
 
-
             FancyToast.makeText(this, country.getName() + "\n"
                             + country.getAlpha2Code() + "\n"
                             + country.getAlpha3Code(), FancyToast.LENGTH_LONG,
                     FancyToast.SUCCESS, R.drawable.eagle, false).show();
+
+            adapterActivity = new AdapterActivity(this,  countries);
+            recyclerView.setAdapter(adapterActivity);
+            adapterActivity.notifyDataSetChanged();
+
 
         }
 

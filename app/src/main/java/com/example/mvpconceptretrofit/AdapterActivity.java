@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.mvpconceptretrofit.Model.Country;
 import com.example.mvpconceptretrofit.Model.Data;
+import com.example.mvpconceptretrofit.View.ContryView;
 import com.example.mvpconceptretrofit.View.MainActivity;
 import com.example.mvpconceptretrofit.presenter.CountryPresenter;
 
@@ -23,7 +24,17 @@ import retrofit2.Call;
 public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.ViewHolder> {
 
 
-    private List<Data> dataList;
+    MainActivity mainActivity;
+    List<Country> countries;
+
+    public AdapterActivity() {
+    }
+
+    public AdapterActivity(MainActivity mainActivity, List<Country> countries) {
+        this.mainActivity = mainActivity;
+        this.countries = countries;
+        notifyDataSetChanged();
+    }
 
 
     @NonNull
@@ -32,19 +43,24 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.ViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.activity_adapter, viewGroup, false);
         return new ViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterActivity.ViewHolder viewHolder, int i) {
-
-        viewHolder.country.setText(dataList.get(i).getRestResponse().getResult().get(i).getName());
+      /*  viewHolder.country.setText(dataList.get(i).getRestResponse().getResult().get(i).getName());
         viewHolder.Alpha2.setText(dataList.get(i).getRestResponse().getResult().get(i).getAlpha2Code());
         viewHolder.Alpha3.setText(dataList.get(i).getRestResponse().getResult().get(i).getAlpha3Code());
+*/
+
+        viewHolder.country.setText(countries.get(i).getName());
+        viewHolder.Alpha2.setText(countries.get(i).getAlpha2Code());
+        viewHolder.Alpha3.setText(countries.get(i).getAlpha3Code());
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return countries.size();
 
     }
 
